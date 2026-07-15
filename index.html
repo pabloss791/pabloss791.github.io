@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Camila, de Rodrigo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<audio id="song" src="cancion.mp3" loop></audio>
+
+<section class="scene active" id="scene-intro">
+  <div class="heart-beat" aria-hidden="true">❤️</div>
+  <p class="fade-phrase" id="intro-phrase">Hay un lugar al que siempre puedes regresar cuando me extrañes...</p>
+  <button class="btn btn-ghost fade-btn" id="btn-enter">Entrar</button>
+</section>
+
+<section class="scene" id="scene-password">
+  <p class="eyebrow">Solo la persona para quien hice esto</p>
+  <p class="lock-title">sabe cómo entrar.</p>
+  <form id="password-form" autocomplete="off">
+    <input type="text" id="password-input" placeholder="• • • • • • • • • •" inputmode="text" autocomplete="off">
+    <button type="submit" class="btn btn-solid">Abrir</button>
+  </form>
+  <p class="hint" id="password-hint">&nbsp;</p>
+</section>
+
+<section class="scene" id="scene-reveal">
+  <div class="reveal-photo-wrap">
+    <img src="https://picsum.photos/seed/rodricam-main/1000/1300" alt="Rodrigo y Camila" class="reveal-photo" id="main-photo">
+  </div>
+  <div class="reveal-message">
+    <p>Hola, mi amor.</p>
+    <p>Si estás leyendo esto, es porque hoy cumplimos dos meses. Me hubiera encantado estar contigo para abrazarte, pero mientras ese día llega, hice este pequeño lugar para que siempre puedas sentir que estoy un poquito más cerca de ti.</p>
+  </div>
+  <button class="btn btn-ghost" id="btn-to-counter">Continuar</button>
+</section>
+
+<section class="scene" id="scene-counter">
+  <div class="counter-heart">❤️</div>
+  <p class="counter-lead">Han pasado</p>
+  <div class="counter-grid">
+    <div class="counter-cell"><span id="count-days">0</span><label>días</label></div>
+    <div class="counter-cell"><span id="count-hours">0</span><label>horas</label></div>
+    <div class="counter-cell"><span id="count-minutes">0</span><label>minutos</label></div>
+    <div class="counter-cell"><span id="count-seconds">0</span><label>segundos</label></div>
+  </div>
+  <p class="counter-tail">desde que comenzó nuestra historia.</p>
+  <button class="btn btn-ghost" id="btn-to-timeline">Ver nuestra historia</button>
+</section>
+
+<section class="scene scene-scroll" id="scene-timeline">
+  <div class="timeline-intro">
+    <p class="timeline-intro-phrase" id="t-phrase-1">Antes de ser nosotros, hubo una historia que poco a poco nos fue acercando...</p>
+    <p class="timeline-intro-phrase" id="t-phrase-2">Y quiero recordar contigo cómo llegamos hasta aquí.</p>
+    <button class="btn btn-ghost" id="btn-start-story">Comenzar viaje</button>
+  </div>
+  
+  <div class="timeline-container hidden" id="timeline-container">
+    <div class="timeline-line"></div>
+    <div class="timeline-wrapper" id="timeline-list">
+      </div>
+    <button class="btn btn-ghost" id="btn-to-gallery" style="margin-top: 4rem;">Ver nuestras fotos</button>
+  </div>
+</section>
+
+<section class="scene scene-scroll" id="scene-gallery">
+  <h2 class="section-title">Momentos</h2>
+  <div class="table-wrap">
+    <div class="photo-table" id="photo-table"></div>
+  </div>
+  <button class="btn btn-solid" id="btn-to-letter">Todavía no es momento de leer la carta</button>
+</section>
+
+<div class="modal" id="photo-modal">
+  <img src="" alt="" id="modal-img">
+</div>
+
+<section class="scene scene-letter-bg" id="scene-letter">
+  <div class="letter-paper">
+    <p id="letter-text"></p>
+    <span class="caret" id="letter-caret">|</span>
+  </div>
+  <button class="btn btn-dark hidden" id="btn-to-stars">Todavía tengo algo más para ti</button>
+</section>
+
+<section class="scene" id="scene-stars">
+  <h2 class="section-title stars-title">Cada estrella es un motivo por el que te amo</h2>
+  <p class="stars-progress" id="stars-progress">0 / 0 descubiertas</p>
+  <div class="sky" id="sky"></div>
+</section>
+
+<div class="reason-panel" id="reason-panel">
+  <p id="reason-text"></p>
+  <button class="btn btn-ghost small" id="reason-close">Cerrar</button>
+</div>
+
+<div class="final-overlay" id="final-overlay">
+  <p class="final-heart">❤️</p>
+  <p class="final-text">Y así, una por una, son todas las razones por las que te amo.<br>Feliz 2 meses, mi amor.</p>
+  <p class="final-signature">— Rodrigo</p>
+  <button class="btn btn-ghost" id="btn-restart">Volver al inicio</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

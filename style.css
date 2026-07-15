@@ -1,0 +1,529 @@
+:root{
+  --midnight: #120c1a;
+  --midnight-2: #1e1430;
+  --midnight-3: #2a1d3d;
+  --blush: #f3cdd3;
+  --gold: #d9a866;
+  --rose: #b96473;
+  --cream: #f8f1e7;
+  --heart: #e14a5c;
+
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Jost', sans-serif;
+  --font-code: 'Space Mono', monospace;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ height:100%; }
+body{
+  background:var(--midnight);
+  color:var(--cream);
+  font-family:var(--font-body);
+  overflow-x:hidden;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
+
+/* =========================================================
+   ESCENAS
+   ========================================================= */
+.scene{
+  display:none;
+  min-height:100vh;
+  width:100%;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8vh 6vw;
+  position:relative;
+}
+.scene.active{ display:flex; animation:sceneIn 1.1s ease; }
+.scene.scene-scroll{ justify-content:flex-start; padding-top:12vh; padding-bottom:14vh; }
+
+@keyframes sceneIn{
+  from{ opacity:0; }
+  to{ opacity:1; }
+}
+
+.hidden{ display:none !important; }
+
+/* buttons */
+.btn{
+  font-family:var(--font-body);
+  font-size:0.95rem;
+  letter-spacing:0.04em;
+  padding:0.9em 2em;
+  border-radius:100px;
+  cursor:pointer;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--cream);
+  transition:all .35s ease;
+  margin-top:2.5rem;
+}
+.btn:hover{ background:var(--gold); color:var(--midnight); }
+.btn-solid{ background:var(--gold); color:var(--midnight); border-color:var(--gold); }
+.btn-solid:hover{ background:var(--rose); border-color:var(--rose); color:var(--cream); }
+.btn-ghost{ background:transparent; }
+.btn-dark{ border-color:var(--midnight-3); color:var(--midnight); }
+.btn-dark:hover{ background:var(--midnight); color:var(--cream); }
+.btn.small{ font-size:0.8rem; padding:0.6em 1.4em; margin-top:1.2rem; }
+
+/* =========================================================
+   ESCENA 1 — INTRO
+   ========================================================= */
+#scene-intro{ background:var(--midnight); }
+.heart-beat{
+  font-size:4rem;
+  animation:beat 1.15s ease-in-out infinite;
+  filter:drop-shadow(0 0 25px rgba(225,74,92,0.55));
+}
+@keyframes beat{
+  0%,100%{ transform:scale(1); }
+  15%{ transform:scale(1.18); }
+  30%{ transform:scale(1); }
+  45%{ transform:scale(1.12); }
+  60%{ transform:scale(1); }
+}
+.fade-phrase{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.2rem, 2.6vw, 1.7rem);
+  max-width:38ch;
+  margin-top:2.6rem;
+  opacity:0;
+  color:var(--blush);
+}
+.fade-phrase.show{ animation:fadeUp 2.4s ease forwards; }
+.fade-btn{ opacity:0; pointer-events:none; }
+.fade-btn.show{ animation:fadeUp 1.6s ease forwards; pointer-events:auto; }
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(14px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* =========================================================
+   ESCENA 2 — CONTRASEÑA
+   ========================================================= */
+#scene-password{ background:var(--midnight-2); }
+.eyebrow{
+  font-family:var(--font-body);
+  text-transform:uppercase;
+  letter-spacing:0.22em;
+  font-size:0.75rem;
+  color:var(--gold);
+}
+.lock-title{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.4rem, 3vw, 2rem);
+  margin-top:0.6rem;
+  max-width:22ch;
+}
+#password-form{
+  margin-top:2.8rem;
+  display:flex;
+  gap:0.8rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+#password-input{
+  font-family:var(--font-code);
+  letter-spacing:0.12em;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--rose);
+  color:var(--cream);
+  text-align:center;
+  font-size:1.1rem;
+  padding:0.6em 0.4em;
+  width:220px;
+  outline:none;
+}
+#password-input:focus{ border-color:var(--gold); }
+.hint{
+  margin-top:1.2rem;
+  font-size:0.85rem;
+  color:var(--rose);
+  min-height:1.2em;
+}
+.shake{ animation:shake .45s ease; }
+@keyframes shake{
+  0%,100%{ transform:translateX(0); }
+  20%{ transform:translateX(-8px); }
+  40%{ transform:translateX(8px); }
+  60%{ transform:translateX(-6px); }
+  80%{ transform:translateX(6px); }
+}
+
+/* =========================================================
+   ESCENA 3 — REVELACIÓN
+   ========================================================= */
+#scene-reveal{ background:var(--midnight); }
+.reveal-photo-wrap{
+  width:min(78vw, 360px);
+  aspect-ratio:3/4;
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,0.5);
+}
+.reveal-photo{ width:100%; height:100%; object-fit:cover; }
+.reveal-message{
+  margin-top:2.6rem;
+  max-width:46ch;
+}
+.reveal-message p{
+  font-family:var(--font-display);
+  font-size:clamp(1rem, 2vw, 1.2rem);
+  line-height:1.7;
+  margin-bottom:1rem;
+  color:var(--blush);
+}
+.reveal-message p:first-child{ font-style:italic; font-size:1.4rem; color:var(--gold); }
+
+/* =========================================================
+   ESCENA 4 — CONTADOR
+   ========================================================= */
+#scene-counter{ background:var(--midnight-2); }
+.counter-heart{ font-size:2.4rem; animation:beat 1.4s ease-in-out infinite; }
+.counter-lead{ margin-top:1rem; font-size:1rem; letter-spacing:0.06em; color:var(--blush); }
+.counter-grid{
+  display:flex;
+  gap:clamp(1rem,3vw,2.4rem);
+  margin-top:1.6rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.counter-cell{ display:flex; flex-direction:column; align-items:center; }
+.counter-cell span{
+  font-family:var(--font-display);
+  font-size:clamp(2.2rem, 5vw, 3.2rem);
+  color:var(--gold);
+  line-height:1;
+}
+.counter-cell label{
+  margin-top:0.4rem;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--rose);
+}
+.counter-tail{ margin-top:1.8rem; font-family:var(--font-display); font-style:italic; color:var(--blush); }
+
+/* =========================================================
+   ESCENA 5 — LÍNEA DE TIEMPO INTERACTIVA ("ÁLBUM")
+   ========================================================= */
+#scene-timeline {
+  background: var(--midnight);
+  overflow-y: auto;
+}
+.timeline-intro {
+  max-width: 44ch;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+.timeline-intro-phrase {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: var(--blush);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(15px);
+}
+.timeline-intro-phrase.show {
+  animation: fadeUp 1.8s ease forwards;
+}
+#btn-start-story {
+  opacity: 0;
+  pointer-events: none;
+}
+#btn-start-story.show {
+  animation: fadeUp 1.4s ease forwards;
+  pointer-events: auto;
+}
+
+/* El contenedor principal de la línea */
+.timeline-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem 0;
+}
+/* La línea vertical central de fondo */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold) 0%, var(--rose) 50%, var(--gold) 100%);
+  transform: translateX(-50%);
+  box-shadow: 0 0 12px var(--gold);
+  opacity: 0.6;
+}
+.timeline-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  position: relative;
+}
+
+/* Cada nodo de la historia */
+.timeline-node {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* Por defecto derecha */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+.timeline-node:nth-child(even) {
+  justify-content: flex-start; /* Alternados a la izquierda */
+}
+.timeline-node.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* El ícono que se posa sobre la línea vertical */
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--midnight-2);
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(217,168,102,0.4);
+}
+
+/* Las tarjetas del álbum */
+.timeline-card {
+  width: 44%;
+  background: var(--midnight-2);
+  border: 1px solid rgba(217,168,102,0.25);
+  border-radius: 12px;
+  padding: 1.8rem;
+  text-align: left;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  transition: border-color 0.4s, transform 0.4s;
+}
+.timeline-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-5px);
+}
+.timeline-node:nth-child(even) .timeline-card {
+  margin-left: 0;
+}
+.timeline-node:nth-child(odd) .timeline-card {
+  margin-right: 0;
+}
+
+/* Encabezados de la tarjeta */
+.timeline-card-date {
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  color: var(--rose);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.timeline-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+.timeline-card-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--cream);
+  opacity: 0.9;
+}
+
+/* Imagen integrada opcional dentro de cada momento */
+.timeline-card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-top: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Diseño responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 20px;
+    transform: none;
+  }
+  .timeline-dot {
+    left: 20px;
+    transform: translate(-50%, -50%);
+  }
+  .timeline-node {
+    justify-content: flex-end !important;
+  }
+  .timeline-card {
+    width: calc(100% - 45px);
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* =========================================================
+   ESCENA 6 — GALERÍA
+   ========================================================= */
+#scene-gallery{ background:var(--midnight-2); }
+.table-wrap{ width:100%; max-width:900px; }
+.photo-table{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem 1.4rem;
+  justify-content:center;
+  padding:1rem 0 2rem;
+}
+.photo-card{
+  width:190px;
+  background:var(--cream);
+  padding:10px 10px 26px;
+  box-shadow:0 14px 26px rgba(0,0,0,0.4);
+  cursor:pointer;
+  transition:transform .3s ease;
+}
+.photo-card img{ width:100%; height:220px; object-fit:cover; display:block; }
+.photo-card:hover{ transform:translateY(-6px) scale(1.02); }
+
+.modal{
+  display:none;
+  position:fixed; inset:0;
+  background:rgba(10,7,14,0.92);
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  padding:4vh 4vw;
+}
+.modal.show{ display:flex; }
+.modal img{ max-width:90vw; max-height:88vh; border-radius:4px; box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+
+/* =========================================================
+   ESCENA 7 — CARTA
+   ========================================================= */
+.scene-letter-bg{ background:var(--cream); color:var(--midnight); }
+.letter-paper{
+  max-width:560px;
+  font-family:var(--font-display);
+  font-size:clamp(1rem, 2vw, 1.25rem);
+  line-height:1.9;
+  color:var(--midnight-3);
+  text-align:left;
+  white-space:pre-wrap;
+  padding: 2rem 1rem;
+}
+.caret{
+  display:inline-block;
+  animation:blink 1s step-end infinite;
+  color:var(--rose);
+}
+@keyframes blink{ 50%{ opacity:0; } }
+
+/* =========================================================
+   ESCENA 8 — ESTRELLAS
+   ========================================================= */
+#scene-stars{ background:radial-gradient(ellipse at 50% 20%, var(--midnight-3), var(--midnight) 70%); overflow:hidden; }
+.stars-title{ max-width:26ch; }
+.stars-progress{ font-size:0.85rem; letter-spacing:0.08em; color:var(--rose); margin-bottom:1.5rem; }
+.sky{
+  position:relative;
+  width:100%;
+  max-width:720px;
+  height:52vh;
+  min-height:320px;
+}
+.star{
+  position:absolute;
+  width:24px; height:24px;
+  background:var(--gold);
+  clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  cursor:pointer;
+  animation:twinkle 2.6s ease-in-out infinite;
+  transition:transform .25s ease;
+}
+.star:hover{ transform:scale(1.35); }
+.star.found{ background:var(--rose); opacity:0.55; }
+@keyframes twinkle{
+  0%,100%{ opacity:0.55; }
+  50%{ opacity:1; }
+}
+
+.reason-panel{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(10,7,14,0.9);
+  z-index:60;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  padding:6vh 8vw;
+}
+.reason-panel.show{ display:flex; }
+.reason-panel p{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.1rem, 2.6vw, 1.5rem);
+  max-width:34ch;
+  color:var(--blush);
+}
+
+.final-overlay{
+  display:none;
+  position:fixed; inset:0;
+  background:var(--midnight);
+  z-index:70;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  padding:6vh 8vw;
+}
+.final-overlay.show{ display:flex; animation:sceneIn 1.4s ease; }
+.final-heart{ font-size:3rem; animation:beat 1.3s ease-in-out infinite; }
+.final-text{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:clamp(1.1rem, 2.6vw, 1.5rem);
+  max-width:36ch;
+  margin-top:1.6rem;
+  color:var(--blush);
+  line-height:1.7;
+}
+.final-signature{ margin-top:1.4rem; color:var(--gold); letter-spacing:0.08em; }
+
+/* small screens */
+@media (max-width:480px){
+  #password-input{ width:170px; }
+  .counter-grid{ gap:1rem; }
+}
